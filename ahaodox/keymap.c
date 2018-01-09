@@ -1,6 +1,6 @@
 #include QMK_KEYBOARD_H
-#include "debug.h"
 #include "action_layer.h"
+#include "debug.h"
 #include "version.h"
 
 #define BASE 0 // default layer
@@ -13,19 +13,11 @@
 #undef TAPPING_TERM
 #define TAPPING_TERM 100
 
-//Tap Dance Declarations
-enum {
-  TD_HYPERSPACE_LEFT = 0,
-  TD_HYPERSPACE_RIGHT = 1
-};
+// Tap Dance Declarations
+enum { TD_HYPERSPACE_LEFT = 0, TD_HYPERSPACE_RIGHT = 1 };
 
 // Macro shortcuts
-enum {
-  TAB_RIGHT = 1,
-  TAB_LEFT = 2,
-  TMUX_COPY_MODE = 5,
-  KWM_ESCAPE_SEQ = 6
-};
+enum { TAB_RIGHT = 1, TAB_LEFT = 2, TMUX_COPY_MODE = 5, KWM_ESCAPE_SEQ = 6 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
@@ -200,7 +192,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 const uint16_t PROGMEM fn_actions[] = {
-    [1] = ACTION_LAYER_TAP_TOGGLE(SYMB)                // FN1 - Momentary Layer 1 (Symbols)
+    [1] = ACTION_LAYER_TAP_TOGGLE(SYMB) // FN1 - Momentary Layer 1 (Symbols)
 };
 
 /*
@@ -209,15 +201,17 @@ const macro_t *tmux_escape(void) {
 }
 
 const macro_t *shift_tab_left(void) {
-	return MACRO( D(LGUI), D(LSFT), T(LCBR), U(LSFT), U(LGUI), END  );
+        return MACRO( D(LGUI), D(LSFT), T(LCBR), U(LSFT), U(LGUI), END  );
 };
 
 const macro_t *shift_tab_right(void) {
-	return MACRO( D(LGUI), D(LSFT), T(RCBR), U(LSFT), U(LGUI), END  );
+        return MACRO( D(LGUI), D(LSFT), T(RCBR), U(LSFT), U(LGUI), END  );
 }
 */
 /*
-const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) // this is the function signature -- just copy/paste it into your keymap file as it is.
+const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) //
+this is the function signature -- just copy/paste it into your keymap file as it
+is.
 {
   switch(id) {
     case 0: // Tmux Ctrl+B
@@ -232,7 +226,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) //
       break;
     case 2: // Shift window tab left
       if (record->event.pressed) {
-				return shift_tab_left();
+                                return shift_tab_left();
       }
       break;
     case 3: // Tmux Ctrl+B, P
@@ -261,45 +255,45 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) //
 */
 
 // Runs just one time when the keyboard initializes.
-void matrix_init_user(void) {
+void matrix_init_user(void){
 
 };
 
-void goto_left_space(void) {
-		/* register_code(KC_RCTL); */
-		/* register_code(KC_LEFT); */
-		/* unregister_code(KC_LEFT); */
-		/* unregister_code(KC_RCTL); */
+void goto_left_space(void){
+    /* register_code(KC_RCTL); */
+    /* register_code(KC_LEFT); */
+    /* unregister_code(KC_LEFT); */
+    /* unregister_code(KC_RCTL); */
 };
 
 void goto_right_space(void) {
-		/* register_code(KC_RCTL); */
-		/* register_code(KC_RGHT); */
-		/* unregister_code(KC_RGHT); */
-		/* unregister_code(KC_RCTL); */
+  /* register_code(KC_RCTL); */
+  /* register_code(KC_RGHT); */
+  /* unregister_code(KC_RGHT); */
+  /* unregister_code(KC_RCTL); */
 }
 
 void goto_left_tab(void) {
-		/* register_code(KC_LGUI); */
-		/* register_code(KC_LSFT); */
-		/* register_code(KC_LCBR); */
-		/* unregister_code(KC_LCBR); */
-		/* unregister_code(KC_LSFT); */
-		/* unregister_code(KC_LGUI); */
+  /* register_code(KC_LGUI); */
+  /* register_code(KC_LSFT); */
+  /* register_code(KC_LCBR); */
+  /* unregister_code(KC_LCBR); */
+  /* unregister_code(KC_LSFT); */
+  /* unregister_code(KC_LGUI); */
 }
 
 void goto_right_tab(void) {
-		/* register_code(KC_LGUI); */
-		/* register_code(KC_LSFT); */
-		/* register_code(KC_RCBR); */
-		/* unregister_code(KC_RCBR); */
-		/* unregister_code(KC_LSFT); */
-		/* unregister_code(KC_LGUI); */
+  /* register_code(KC_LGUI); */
+  /* register_code(KC_LSFT); */
+  /* register_code(KC_RCBR); */
+  /* unregister_code(KC_RCBR); */
+  /* unregister_code(KC_LSFT); */
+  /* unregister_code(KC_LGUI); */
 }
 
 void hyperspace_left(qk_tap_dance_state_t *state, void *user_data) {
   if (state->count >= 2) {
-		goto_left_space();
+    goto_left_space();
   } else {
     goto_left_tab();
   }
@@ -307,7 +301,7 @@ void hyperspace_left(qk_tap_dance_state_t *state, void *user_data) {
 
 void hyperspace_right(qk_tap_dance_state_t *state, void *user_data) {
   if (state->count >= 2) {
-		goto_right_space();
+    goto_right_space();
   } else {
     goto_right_tab();
   }
@@ -324,8 +318,8 @@ void activate_tmux_edit_mode(void) {
 
 // tap dance definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [TD_HYPERSPACE_LEFT]  = ACTION_TAP_DANCE_FN(hyperspace_left),
-  [TD_HYPERSPACE_RIGHT]  = ACTION_TAP_DANCE_FN(hyperspace_right),
+    [TD_HYPERSPACE_LEFT] = ACTION_TAP_DANCE_FN(hyperspace_left),
+    [TD_HYPERSPACE_RIGHT] = ACTION_TAP_DANCE_FN(hyperspace_right),
 };
 
 // leader definition
@@ -333,40 +327,38 @@ LEADER_EXTERNS();
 
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void) {
+  uint8_t layer = biton32(layer_state);
 
-    uint8_t layer = biton32(layer_state);
+  ergodox_board_led_off();
+  ergodox_right_led_1_off();
+  ergodox_right_led_2_off();
+  ergodox_right_led_3_off();
+  switch (layer) {
+    // TODO: Make this relevant to the ErgoDox EZ.
+  case SYMB:
+    ergodox_right_led_1_on();
+    break;
+  case MDIA:
+    ergodox_right_led_2_on();
+    break;
+  case OHND:
+    ergodox_right_led_3_on();
+    break;
+  default:
+    // none
+    break;
+  }
 
-    ergodox_board_led_off();
-    ergodox_right_led_1_off();
-    ergodox_right_led_2_off();
-    ergodox_right_led_3_off();
-    switch (layer) {
-      // TODO: Make this relevant to the ErgoDox EZ.
-        case SYMB:
-            ergodox_right_led_1_on();
-            break;
-        case MDIA:
-            ergodox_right_led_2_on();
-            break;
-        case OHND:
-            ergodox_right_led_3_on();
-            break;
-        default:
-            // none
-            break;
+  LEADER_DICTIONARY() {
+    leading = false;
+    leader_end();
+
+    SEQ_ONE_KEY(KC_F) {
+      activate_tmux_edit_mode();
+      register_code(KC_LSFT);
+      register_code(KC_SLSH);
+      unregister_code(KC_SLSH);
+      unregister_code(KC_LSFT);
     }
-
-		LEADER_DICTIONARY() {
-			leading = false;
-			leader_end();
-
-			SEQ_ONE_KEY(KC_F) {
-        activate_tmux_edit_mode();
-        register_code(KC_LSFT);
-        register_code(KC_SLSH);
-        unregister_code(KC_SLSH);
-        unregister_code(KC_LSFT);
-			}
-		}
+  }
 };
-
