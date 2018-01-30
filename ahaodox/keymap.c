@@ -17,13 +17,19 @@
 enum { TD_HYPERSPACE_LEFT = 0, TD_HYPERSPACE_RIGHT = 1 };
 
 // Macro shortcuts
-enum { TAB_RIGHT = 1, TAB_LEFT = 2, TMUX_COPY_MODE = 5, KWM_ESCAPE_SEQ = 6 };
+enum custom_keycodes {
+  TAB_RIGHT = SAFE_RANGE,
+  TAB_LEFT,
+  TMUX_COPY_MODE,
+  TMUX_ACTIVATION,
+  KWM_ESCAPE_SEQ
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |   =    |   1  |   2  |   3  |   4  |   5  | M(1) |           | M(2) |   6  |   7  |   8  |   9  |   0  |   -    |
+ * |   =    |   1  |   2  |   3  |   4  |   5  | HS_L |           | HS_R |   6  |   7  |   8  |   9  |   0  |   -    |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * | Tab    |   Q  |   W  |   E  |   R  |   T  | M(6) |           | Lead |   Y  |   U  |   I  |   O  |   P  |   \    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -47,12 +53,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // left hand
         KC_EQL,   KC_1,    KC_2,    KC_3,     KC_4,     KC_5,  TD(TD_HYPERSPACE_LEFT),
         KC_TAB,   KC_Q,    KC_W,    KC_E,     KC_R,     KC_T,  KC_TRNS,
-        KC_TRNS,  KC_A,    KC_S,    KC_D,     KC_F,     KC_G,
+        KC_LCTL,  KC_A,    KC_S,    KC_D,     KC_F,     KC_G,
         KC_LSFT,  KC_Z,    KC_X,    KC_C,     KC_V,     KC_B,  MO(SYMB),
         KC_ESC,   KC_GRV,  KC_INS,  KC_LEFT,  KC_RGHT,
-                                              MO(OHND), KC_LALT,
+                                              KC_LCTL,  KC_LALT,
                                                         KC_TAB,
-                                         KC_BSPC,KC_DEL,KC_TRNS,
+                                         KC_BSPC,KC_DEL,TMUX_COPY_MODE,
         // right hand
              TD(TD_HYPERSPACE_RIGHT),KC_6,   KC_7,   KC_8,   KC_9,   KC_0,     KC_MINS,
              KC_LEAD                ,KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,     KC_BSLS,
@@ -195,6 +201,25 @@ const uint16_t PROGMEM fn_actions[] = {
     [1] = ACTION_LAYER_TAP_TOGGLE(SYMB) // FN1 - Momentary Layer 1 (Symbols)
 };
 
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (record->event.pressed) {
+    switch (keycode) {
+    case TAB_LEFT:
+      // SEND_STRING(KC_TAB);
+      return false;
+      break;
+    case TAB_RIGHT:
+      // SEND_STRING(KC_TAB);
+      return false;
+      break;
+    case TMUX_COPY_MODE:
+      SEND_STRING(SS_LCTRL("b")"[");
+      return false;
+      break;
+    }
+  }
+  return true;
+};
 /*
 const macro_t *tmux_escape(void) {
   return MACRO( D(LCTRL), T(B), U(LCTRL), END  );
