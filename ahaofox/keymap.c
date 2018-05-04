@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Layer 0: Default Layer
      * ,---------------------------------------------------------------.
-     * |Esc|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =| ` | \ |Ins|
+     * |Esc|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =| ` | \ |Str|
      * |---------------------------------------------------------------|
      * | Tab |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|  \  |Del|
      * |---------------------------------------------------------------|
@@ -27,7 +27,7 @@ const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |---------------------------------------------------------------|
      * | Shift |  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /| Shift |Up |PgD|
      * |---------------------------------------------------------------|
-     * | FN |Gui |Alt |         Space         |Alt |Ctrl|  |Lef|Dow|Rig|
+     * | FN |Gui |Alt |         Space         |Alt |Magc|  |Lef|Dow|Rig|
      * `---------------------------------------------------------------'
      */
     [0] = KEYMAP( \
@@ -77,6 +77,19 @@ const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,        KC_TRNS,KC_TRNS,\
         KC_TRNS,KC_TRNS,KC_TRNS,                        KC_TRNS,                KC_TRNS,KC_TRNS,KC_TRNS,        KC_TRNS,KC_TRNS,KC_TRNS \
     ),
+    /* Layer 2: Star Layer
+     * ,---------------------------------------------------------------.
+     * |   |   |   |   |   |   |   |   |   |   |   |   |   |       |   |
+     * |---------------------------------------------------------------|
+     * |     |   |   |MUp|   |   |   |   |   |   |   |   |   |     |   |
+     * |---------------------------------------------------------------|
+     * |      |   |MLf|MDw|MRt|   |   |   |   |   |   |   |        |   |
+     * |---------------------------------------------------------------|
+     * |       |   |   |   |   |   |   |   |   |   |   |       |   |   |
+     * |---------------------------------------------------------------|
+     * |    |    |    |                       |    |    |  |   |   |   |
+     * `---------------------------------------------------------------'
+     */
     [3] = KEYMAP( \
         KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,\
         KC_TRNS,KC_TRNS,KC_TRNS,KC_MS_U,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,        KC_TRNS,\
